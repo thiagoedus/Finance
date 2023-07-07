@@ -20,23 +20,25 @@
             <div class="col-md-5">
                 <p class="fonte-destaque">Suas contas</p>
                 <hr>
-
+                
+                {% if not contas%}
+                    <div class="alert alert-danger" role="alert">
+                        Nenhuma conta foi encontrada
+                    </div>
+                {% else %}
+                {% for conta in contas %}
                 <div class="contas">
-
-                    
                         <div class="lista-contas-main">
-                            <span><img width="10%" src="#">&nbsp&nbspNubank</span>
+                            <span><img width="10%" src=" {% if conta.icone %}{{ conta.icone.url }}{% endif %}">{{ conta.banco }}</span>
 
-                            <span class="total-conta positivo ">R$ 1.800,00&nbsp&nbsp&nbsp <a href="#"><img src="{% static 'perfil/img/exit.png' %}"></a></span>
-                        </div>
-                        <br>
-                    
-                    
+                            <span class="total-conta positivo ">{{ conta.valor }}<a href="{% url 'remover_banco' conta.id %}"><img src="{% static 'perfil/img/exit.png' %}"></a></span>
+                        </div>                   
                 </div>
-
                 <hr>
+                {% endfor %}
                 <span class="fonte-destaque">Total:</span>
-                <span class="positivo total-conta font-destaque">R$ 1.800,00</span>
+                <span class="positivo total-conta font-destaque">R$ {{total}}</span>
+                {% endif %}
             </div>
 
             <div class="col-md-2"></div>
@@ -50,7 +52,9 @@
                     <br>
                     <label>Banco</label>
                     <select name="banco" class="form-select">
-                        <option value="NU">Nubank</option>
+                        {% comment %} {% for banco in contas. %}
+                            <option value="{{conta.banco_choices}}">{{conta.banco_choices}}</option> 
+                        {% endfor %} {% endcomment %}
                     </select>
                     <br>
                     <label>Tipo</label>
