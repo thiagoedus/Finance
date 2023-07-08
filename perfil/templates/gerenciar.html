@@ -109,9 +109,19 @@
                     {% for categoria in categorias %}
                     <div class="contas">
                         <div class="lista-contas-main">
-                            <span>{{ categoria.categoria }}</span>
+                            <span>{{ categoria.categoria }} 
+                                {% if not categoria.essencial %}
+                                    <img src="{% static 'perfil/img/exit.png' %}">
+                                {% else %}
+                                <img src="{% static 'perfil/img/check.png' %}">
+                                {% endif %}
+                            </span>
 
-                            <span class="total-conta positivo "><a href="{% url 'deletar_categoria' categoria.id %}"><img src="{% static 'perfil/img/exit.png' %}"></a></span>
+                            <span class="total-conta positivo ">
+                                <a href="{% url 'deletar_categoria' categoria.id %}">
+                                    <img src="{% static 'perfil/img/delete.png' %}" style="width:20px">
+                                </a>
+                            </span>
                         </div>                   
                     </div>
                     <hr>
