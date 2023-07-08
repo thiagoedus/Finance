@@ -3,9 +3,12 @@ from django.http import HttpResponse
 from .models import Conta, Categoria
 from django.contrib import messages
 from django.contrib.messages import constants
+from .utils import calcula_total
 
 def home(request):
-    return render(request, "home.html")
+    contas = Conta.objects.all()
+    total_contas = calcula_total(contas, 'valor')
+    return render(request, "home.html", {'contas': contas, 'total_contas': total_contas})
 
 def gerenciar(request):
     categorias = Categoria.objects.all()
@@ -62,3 +65,14 @@ def deletar_categoria(request, id):
     categoria.delete()
     messages.add_message(request, constants.SUCCESS, 'Categoria deletada com sucesso')
     return redirect('gerenciar')
+
+def update_categoria(request, id):
+    categoria = Categoria.objects.get(id=id)
+    try:
+        categoria.essencial = not categoria.essencial
+        categoria.save()
+        messages.add_message(request, constants.SUCCESS, 'Categoria alterada com sucesso')
+    except:
+        messages.add_message(request, constants.ERROR, 'Ocorreu um erro')
+    return redirect('gerenciar')
+

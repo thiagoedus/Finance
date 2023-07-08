@@ -49,21 +49,22 @@
                     <div class="saldo">
                         <span class="fonte-destaque">Saldo total</span>
                         <br>
-                        <span class="font-light">R$ 1.200,00</span>
+                        <span class="font-light">R$ {{ total_contas }}</span>
                     </div>
                     <hr class="hr-borda">
                     <span class="fonte-destaque">Suas contas</span>
 
                     <div class="div-contas">
-                        
-                            <div class="lista-conta">
-                                <span>Nubank</span>
-                                <span class="total-conta">R$ 3.000,00</span>
-                            </div>
+                            
+                            {% for conta in contas %}
+                                <div class="lista-conta">
+                                    <span>{{ conta.banco }}</span>
+                                    <span class="total-conta">R$ {{ conta.valor }}</span>
+                                </div>
+                            {% endfor %}
+
                             <br>
-                        
-                        
-                        
+                               
                     </div>
                     <hr class="hr-borda">
                     <a href="{% url 'gerenciar'%}" class="botao-principal">Gerenciar contas</a>

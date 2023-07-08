@@ -111,9 +111,9 @@
                         <div class="lista-contas-main">
                             <span>{{ categoria.categoria }} 
                                 {% if not categoria.essencial %}
-                                    <img src="{% static 'perfil/img/exit.png' %}">
+                                    <a href="{% url 'update_categoria' categoria.id %}"><img src="{% static 'perfil/img/exit.png' %}"></a>
                                 {% else %}
-                                <img src="{% static 'perfil/img/check.png' %}">
+                                    <a href="{% url 'update_categoria' categoria.id %}"><img src="{% static 'perfil/img/check.png' %}"></a>
                                 {% endif %}
                             </span>
 
