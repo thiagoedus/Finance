@@ -52,9 +52,9 @@
                     <br>
                     <label>Banco</label>
                     <select name="banco" class="form-select">
-                        {% comment %} {% for banco in contas. %}
-                        {% endfor %} {% endcomment %}
-                        <option value="NU">Nubank</option> 
+                        {%for banco in contas%}
+                            <option value="{{ banco.banco.choices }}">{{ banco.banco }}</option> 
+                        {%endfor%}
 
                     </select>
                     <br>
