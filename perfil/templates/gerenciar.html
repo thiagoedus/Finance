@@ -83,7 +83,10 @@
 
                 <form action="{% url 'cadastrar_categoria'%}" method="POST"> {% csrf_token %}
                     <label>Categoria</label>
-                    <input type="text" name="categoria" class="form-control">
+                    <input type="text" name="categoria" class="form-control" placeholder="Nome da categoria">
+                    <br>
+
+                    <input type="number" name="valor_planejamento" class="form-control" placeholder="Valor planejamento">
                     <br>
 
                     <input type="checkbox" name="essencial" value="essencial"><label class="positivo">&nbspEssencial</label>
